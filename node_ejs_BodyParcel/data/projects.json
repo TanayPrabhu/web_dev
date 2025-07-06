@@ -1,0 +1,34 @@
+{
+  "projects": [
+    {
+      "title": "Personal Resume",
+      "description": "A responsive personal portfolio.",
+      "category": "web"
+    },
+    {
+      "title": "E-Commerce Site",
+      "description": "Online store with cart and payment features.",
+      "category": "web"
+    },
+    {
+      "title": "Resume Classifier",
+      "description": "NLP-based system to classify resumes.",
+      "category": "ai-ml"
+    },
+    {
+      "title": "Object Detection",
+      "description": "Using Yolo to detect objects in images.",
+      "category": "ai-ml"
+    },
+    {
+      "title": "Health Tracker App",
+      "description": "Flutter app for health and fitness.",
+      "category": "app-development"
+    },
+    {
+      "title": "Expense Manager",
+      "description": "Track daily expenses and analytics.",
+      "category": "app-development"
+    }
+  ]
+}

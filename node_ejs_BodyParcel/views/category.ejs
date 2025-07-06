@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= categoryTitle %> Projects</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><%= categoryTitle %> Projects</h1>
+    </header>
+
+    <section class="projects">
+      <% projects.forEach(project => { %>
+        <div class="project-item">
+          <p><strong><%= project.title %></strong><br><%= project.description %></p>
+        </div>
+      <% }); %>
+    </section>
+
+    <div style="text-align:center; margin-top:20px;">
+      <a href="/" class="back-btn">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>
