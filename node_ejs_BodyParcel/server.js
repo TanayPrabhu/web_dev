@@ -11,24 +11,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Load JSON data once
+const skills = JSON.parse(fs.readFileSync('./data/skills.json')).skills;
+const allProjects = JSON.parse(fs.readFileSync('./data/projects.json')).projects;
+
+// Home route with optional category query
 app.get('/', (req, res) => {
-  const skills = JSON.parse(fs.readFileSync('./data/skills.json')).skills;
-  res.render('index', { skills });
-});
+  const query = Object.keys(req.query)[0]; // e.g., ?web -> 'web'
 
-app.get('/:category', (req, res) => {
-  const category = req.params.category.toLowerCase();
-  const validCategories = ['web', 'ai-ml', 'app-development'];
-
-  if (!validCategories.includes(category)) {
-    return res.status(404).send('<h1>404 Category Not Found</h1>');
+  if (query) {
+    const projects = allProjects.filter(p => p.category === query);
+    const title = query.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    return res.render('category', { categoryTitle: title, projects });
   }
 
-  const allProjects = JSON.parse(fs.readFileSync('./data/projects.json')).projects;
-  const filteredProjects = allProjects.filter(p => p.category === category);
-  const categoryTitle = category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-
-  res.render('category', { categoryTitle, projects: filteredProjects });
+  res.render('index', { skills });
 });
 
 const PORT = 3000;
