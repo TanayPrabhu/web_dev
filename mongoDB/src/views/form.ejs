@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= assignment ? 'Edit' : 'Add' %> Assignment</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-xl">
+    <h1 class="text-2xl font-bold mb-6 text-center">
+      <%= assignment ? 'Edit Assignment' : 'Add Assignment' %>
+    </h1>
+
+    <form action="<%= assignment ? '/update-assignment' : '/submit-form' %>" method="POST" class="space-y-5">
+      <% if (assignment) { %>
+        <input type="hidden" name="id" value="<%= assignment._id %>">
+      <% } %>
+
+      <div>
+        <label for="name" class="block mb-1 font-medium">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<%= assignment ? assignment.name : '' %>"
+          required
+          class="w-full border border-gray-300 rounded-lg p-2"
+        />
+      </div>
+
+      <div>
+        <label for="link" class="block mb-1 font-medium">Link</label>
+        <input
+          type="text"
+          id="link"
+          name="link"
+          value="<%= assignment ? assignment.link : '' %>"
+          required
+          class="w-full border border-gray-300 rounded-lg p-2"
+        />
+      </div>
+
+      <div>
+        <label for="session" class="block mb-1 font-medium">Session</label>
+        <select
+          id="session"
+          name="session"
+          required
+          class="w-full border border-gray-300 rounded-lg p-2"
+        >
+          <% for (let i = 1; i <= 4; i++) { %>
+            <option value="<%= i %>" <%= assignment && assignment.session == i ? 'selected' : '' %>>
+              Session <%= i %>
+            </option>
+          <% } %>
+        </select>
+      </div>
+
+      <div class="flex justify-between">
+        <a href="/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg">Back</a>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
